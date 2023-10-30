@@ -1,4 +1,5 @@
 import pandas
+from abc import ABC
 
 df = pandas.read_csv("hotels.csv", dtype={"id": str})
 
@@ -34,8 +35,11 @@ class Hotel:
             return False
 
 
+class Ticket(ABC):
+    def generate(self):
+        pass
 
-class ReservationTicket:
+class ReservationTicket(Ticket):
     def __init__(self, customer_name, hotel_object):
         self.customer_name = customer_name
         self.hotel = hotel_object
@@ -59,3 +63,10 @@ class ReservationTicket:
     def convert(amount):
         return amount * 1.2
 
+
+class DigitalTicket(Ticket):
+    def generate(self):
+        return "HEllo this is a digital ticket"
+
+    def download(self):
+        pass
